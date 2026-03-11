@@ -9,9 +9,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $practiceAreas = \App\Models\PracticeArea::all();
         $teamMembers = \App\Models\TeamMember::all();
         $testimonials = \App\Models\Testimonial::all();
@@ -28,9 +28,9 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $mainMenu = \App\Models\NavigationMenu::where('name', 'Main Navigation')->first();
         $footerMenu = \App\Models\NavigationMenu::where('name', 'Footer Links')->first();
 
@@ -39,9 +39,9 @@ class HomeController extends Controller
 
     public function practiceAreas()
     {
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $practiceAreas = \App\Models\PracticeArea::all();
         $mainMenu = \App\Models\NavigationMenu::where('name', 'Main Navigation')->first();
         $footerMenu = \App\Models\NavigationMenu::where('name', 'Footer Links')->first();
@@ -51,9 +51,9 @@ class HomeController extends Controller
 
     public function team()
     {
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $members = \App\Models\TeamMember::all();
         $mainMenu = \App\Models\NavigationMenu::where('name', 'Main Navigation')->first();
         $footerMenu = \App\Models\NavigationMenu::where('name', 'Footer Links')->first();
@@ -63,9 +63,9 @@ class HomeController extends Controller
 
     public function blog()
     {
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $posts = \App\Models\BlogPost::with('category')->latest()->paginate(9);
         $mainMenu = \App\Models\NavigationMenu::where('name', 'Main Navigation')->first();
         $footerMenu = \App\Models\NavigationMenu::where('name', 'Footer Links')->first();
@@ -76,9 +76,9 @@ class HomeController extends Controller
     public function showPage($slug)
     {
         $page = \App\Models\Page::where('slug', $slug)->firstOrFail();
-        $settings = \App\Models\Setting::pluck('setting_value', 'setting_key')->toArray();
-        $colors = \App\Models\SiteColor::pluck('color_value', 'color_key')->toArray();
-        $fonts = \App\Models\SiteFont::pluck('font_family', 'font_key')->toArray();
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $colors = \App\Models\SiteColor::pluck('hex_code', 'name')->toArray();
+        $fonts = \App\Models\SiteFont::pluck('font_family', 'name')->toArray();
         $mainMenu = \App\Models\NavigationMenu::where('name', 'Main Navigation')->first();
         $footerMenu = \App\Models\NavigationMenu::where('name', 'Footer Links')->first();
 

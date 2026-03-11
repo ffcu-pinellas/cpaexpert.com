@@ -15,6 +15,10 @@ Route::get('/migrate', function() {
     \Illuminate\Support\Facades\Artisan::call('migrate --force');
     return "Migrations completed successfully!";
 });
+Route::get('/admin', function() {
+    return redirect()->route('dashboard');
+});
+
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
