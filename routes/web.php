@@ -11,6 +11,10 @@ Route::get('/page/{slug}', [\App\Http\Controllers\HomeController::class, 'showPa
 Route::get('/contact', [\App\Http\Controllers\HomeController::class, 'contact'])->name('public.contact');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
 
+Route::get('/migrate', function() {
+    \Illuminate\Support\Facades\Artisan::call('migrate --force');
+    return "Migrations completed successfully!";
+});
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
