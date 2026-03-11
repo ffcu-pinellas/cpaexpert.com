@@ -31,7 +31,11 @@ else {
     }
 }
 
-# 2. Add All Changes
+# 2. Build Assets
+Write-Host "Building frontend assets (Vite)..." -ForegroundColor Cyan
+npm run build
+
+# 3. Add All Changes
 Write-Host "Adding changes to Git..." -ForegroundColor Cyan
 git add .
 
