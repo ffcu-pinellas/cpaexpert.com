@@ -33,7 +33,8 @@ else {
 
 # 2. Build Assets
 Write-Host "Building frontend assets (Vite)..." -ForegroundColor Cyan
-npm run build
+# Try using npx to find the local vite binary
+npx vite build
 
 # 3. Add All Changes
 Write-Host "Adding changes to Git..." -ForegroundColor Cyan
