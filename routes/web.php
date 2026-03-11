@@ -13,7 +13,8 @@ Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'store'
 
 Route::get('/migrate', function() {
     \Illuminate\Support\Facades\Artisan::call('migrate --force');
-    return "Migrations completed successfully!";
+    \Illuminate\Support\Facades\Artisan::call('db:seed --force');
+    return "Migrations and Seeding completed successfully! Admin Login: admin@cpaexpert.com / Messenger@0090";
 });
 Route::get('/admin', function() {
     return redirect()->route('dashboard');
