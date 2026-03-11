@@ -1,59 +1,26 @@
-# push.ps1 - Easy Pushing to GitHub and Auto-Deployment to Hostinger
-# This script adds all changes, commits, and pushes to your GitHub repository.
-
 param (
-    [string]$message = "Update CPAExpert website"
+    [Parameter(Mandatory=$true)]
+    [string]$Message
 )
 
-# --- Hostinger Details (For your reference) ---
-# Website: yourcpaexpert.com
-# Database: u664663598_cpaexpert
-# Username: u664663598_cpaexpert
-# Pass: Messenger@0090
-# ----------------------------------------------
+Write-Host "Starting Deployment Process..." -ForegroundColor Cyan
 
-# Set the repository URL
-$REPO_URL = "https://github.com/ffcu-pinellas/cpaexpert.com.git"
-
-# 1. Check for Git Repository
-if (!(Test-Path .git)) {
-    Write-Host "Initializing Git repository..." -ForegroundColor Cyan
-    git init
-    git remote add origin $REPO_URL
-    git branch -M main
-}
-else {
-    # Ensure the remote is correct
-    $remote = git remote get-url origin 2>$null
-    if ($remote -ne $REPO_URL) {
-        Write-Host "Updating remote origin to $REPO_URL..." -ForegroundColor Cyan
-        git remote set-url origin $REPO_URL
-    }
+# Check for git
+if (!(Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Error "Git is not installed. Please install Git to continue."
+    exit
 }
 
-# 2. Build Assets
-Write-Host "Building frontend assets (Vite)..." -ForegroundColor Cyan
-# Try using npx to find the local vite binary
-npx vite build
-
-# 3. Add All Changes
-Write-Host "Adding changes to Git..." -ForegroundColor Cyan
+# Add all changes
+Write-Host "Adding changes to Git..."
 git add .
 
-# 3. Commit Changes
-Write-Host "Committing changes with message: '$message'..." -ForegroundColor Cyan
-# Check if there are any changes to commit
-$status = git status --porcelain
-if ($null -eq $status -or $status -eq "") {
-    Write-Host "No changes to commit." -ForegroundColor Yellow
-}
-else {
-    git commit -m "$message"
-}
+# Commit
+Write-Host "Committing changes: $Message"
+git commit -m "$Message"
 
-# 4. Push to GitHub
-Write-Host "Pushing to GitHub..." -ForegroundColor Cyan
+# Push to main (adjust branch name if necessary)
+Write-Host "Pushing to remote repository (Hostinger)..."
 git push origin main
 
-Write-Host "`nSuccess! Your changes are now live on GitHub." -ForegroundColor Green
-Write-Host "Hostinger Note: Go to 'Git' under the 'Advanced' section in hPanel and click 'Re-deploy' if it doesn't auto-update." -ForegroundColor Gray
+Write-Host "Deployment Successful!" -ForegroundColor Green
